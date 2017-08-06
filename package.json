@@ -1,10 +1,18 @@
 {
     "name": "simpleanimation",
     "displayName": "SimpleAnimation",
-    "description": "Simple Animation for Editor",
+    "description": "Simple Animation",
     "version": "0.0.1",
     "publisher": "houtianze",
     "license": "MIT",
+    "repository": {
+        "type": "git",
+        "url": "https://github.com/houtianze/vscode_simple-animation.git"
+    },
+    "homepage": "https://github.com/houtianze/vscode_simple-animation",
+    "bugs": {
+        "url": "https://github.com/houtianze/vscode_simple-animation/issues"
+    },
     "engines": {
         "vscode": "^1.14.0"
     },
@@ -12,14 +20,29 @@
         "Other"
     ],
     "activationEvents": [
-        "onCommand:extension.sayHello"
+        "*"
     ],
     "main": "./out/src/extension",
     "contributes": {
-        "commands": [{
-            "command": "extension.sayHello",
-            "title": "Hello World"
-        }]
+        "configuration": {
+            "properties": {
+                "simpleAnimation.enabled": {
+                    "default": true,
+                    "type": "boolean",
+                    "description": "Enable/disable the animation (without reloading VS Code)"
+                },
+                "simpleAnimation.showDuration": {
+                    "default": "500ms",
+                    "type": "string",
+                    "description": "The duration the animation will stay. (You can use time units, e.g. '2s' for 2 seconds. If no unit is specified, the default unit is milliseconds.)"
+                },
+                "simpleAnimation.changeColor": {
+                    "default": true,
+                    "type": "boolean",
+                    "description": "Whether change the text color while typing"
+                }
+            }
+        }
     },
     "scripts": {
         "vscode:prepublish": "tsc -p ./",
@@ -27,7 +50,11 @@
         "postinstall": "node ./node_modules/vscode/bin/install",
         "test": "node ./node_modules/vscode/bin/test"
     },
+    "dependencies": {
+        "parse-duration": "~0.1.1"
+    },
     "devDependencies": {
+        "parse-duration": "~0.1.1",
         "typescript": "^2.0.3",
         "vscode": "^1.0.0",
         "mocha": "^2.3.3",
